@@ -1,34 +1,32 @@
-# Run this app with `python app.py` and
-# visit http://127.0.0.1:8050/ in your web browser.
-
 from dash import Dash, html, dcc
-import plotly.express as px
-import pandas as pd
+import dash_bootstrap_components as dbc
+import dash
 
-app = Dash(__name__)
+app = Dash(__name__, use_pages=True, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
-# assume you have a "long-form" data frame
-# see https://plotly.com/python/px-arguments/ for more options
-df = pd.DataFrame({
-    "Fruit": ["Apples", "Oranges", "Bananas", "Apples", "Oranges", "Bananas"],
-    "Amount": [4, 1, 2, 2, 4, 5],
-    "City": ["SF", "SF", "SF", "Montreal", "Montreal", "Montreal"]
-})
+#navigation Bar
+navbar = dbc.NavbarSimple(
+    children=[
+        dbc.NavItem(
+          dbc.NavLink(
+            f"{page['name']}", href=page['relative_path']
+          )
+        )
+        for page in dash.page_registry.values() 
+    ],
+    brand="NavbarSimple",
+    brand_href="#",
+    color="primary",
+    dark=True,
+  )
 
-fig = px.bar(df, x="Fruit", y="Amount", color="City", barmode="group")
+app.layout = html.Div([
+  navbar,
+  html.Div(
+  ),
 
-app.layout = html.Div(children=[
-    html.H1(children='Hello Dash'),
-
-    html.Div(children='''
-        Dash: A web application framework for your data.
-    '''),
-
-    dcc.Graph(
-        id='example-graph',
-        figure=fig
-    )
+dash.page_container
 ])
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+	app.run_server(debug=True)
