@@ -4,6 +4,7 @@
 from dash import Dash, html, dcc, Input, Output
 import plotly.express as px
 import pandas as pd
+from choropleth import create_chroropleth
 
 app = Dash(__name__)
 
@@ -42,6 +43,15 @@ app.layout = html.Div(children=[
         dcc.Graph(
         id='example-graph2',
         figure=fig2
+        ),
+    ]),
+
+    # Choropleth --> Make sure you have listing.csv and neighbourhoods.geojson in the data folder
+    html.Div([
+        html.Div('Choropleth map'),
+        dcc.Graph(
+        id='choropleth map',
+        figure=create_chroropleth(),
         ),
     ]),
 
