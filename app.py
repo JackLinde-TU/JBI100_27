@@ -2,7 +2,7 @@ from dash import Dash, html, dcc
 import dash_bootstrap_components as dbc
 import dash
 
-app = Dash(__name__, use_pages=True, external_stylesheets=[dbc.themes.BOOTSTRAP])
+app = Dash(__name__, use_pages=True, external_stylesheets=[dbc.themes.LITERA])
 
 #navigation Bar
 navbar = dbc.NavbarSimple(
@@ -16,16 +16,20 @@ navbar = dbc.NavbarSimple(
     ],
     brand="NavbarSimple",
     brand_href="#",
-    color="primary",
-    dark=True,
+    color="light",
+    dark=False,
   )
 
 app.layout = html.Div([
   navbar,
-  html.Div(
+  html.Main(
+    children=[
+      html.Div(
+        children=[dash.page_container],
+        className="container",
+      )
+    ],
   ),
-
-dash.page_container
 ])
 
 if __name__ == '__main__':
