@@ -14,7 +14,7 @@ navbar = dbc.NavbarSimple(
         )
         for page in dash.page_registry.values() 
     ],
-    brand="NavbarSimple",
+    brand="Airbnb Analyser",
     brand_href="#",
     color="light",
     dark=False,
