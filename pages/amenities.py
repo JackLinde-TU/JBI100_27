@@ -79,12 +79,12 @@ def layout():
         )
       ])
     ]),
-    # dcc.Graph(id="amenities-graph"),
+    dcc.Graph(id="amenities-graph"),
     dcc.Graph(id="violin-graph")
 ])
 
 @callback(
-  # Output("amenities-graph", "figure"), 
+  Output("amenities-graph", "figure"), 
   Output("violin-graph", "figure"), 
   Input("x-axis", "value"),
   Input("choose-amenity", "value"),
@@ -114,6 +114,6 @@ def generate_chart(xAxis, amenities, bedrooms, room_type, exclude_outliers):
 
   if exclude_outliers == 'yes' and xAxis == 'price' and np.shape(df)[0] > 10:
     df = df[df['price'] < df.price.quantile(0.95)]
-  # fig = px.histogram(df, x=xAxis)
+  fig = px.histogram(df, x=xAxis)
   fig2 = px.box(df, x=xAxis)
-  return fig2
+  return fig, fig2
