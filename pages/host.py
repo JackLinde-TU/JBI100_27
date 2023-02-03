@@ -14,7 +14,7 @@ def layout():
   return html.Div([
     html.H1("Host Analysis"),
     dbc.Row([
-      dbc.Label('Date range', html_for="date-range", width=3),
+      dbc.Label('Host since', html_for="date-range", width=3),
       dbc.Col(
         dcc.DatePickerRange(
           id='date-range',
